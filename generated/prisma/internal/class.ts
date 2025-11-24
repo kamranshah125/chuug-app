@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Users\\PMLS\\Desktop\\New folder\\chuug\\generated\\prisma",
+      "value": "C:\\Users\\PMLS\\Desktop\\chuugWK\\chuug\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -37,7 +37,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\PMLS\\Desktop\\New folder\\chuug\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\PMLS\\Desktop\\chuugWK\\chuug\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../prisma",
