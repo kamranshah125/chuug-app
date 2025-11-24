@@ -1,4 +1,3 @@
-import { json } from "@remix-run/node";
 import prisma from "app/db.server";
 import { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 
