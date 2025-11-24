@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id             Int      @id @default(autoincrement())
+  name           String
+  category       String
+  sku            String   @unique
+  productionTime Int
+  orders         Order[]
+}
+
+model Order {
+  id            Int       @id @default(autoincrement())
+  customerName  String
+  quantity      Int
+  orderDate     DateTime
+  deliveryDate  DateTime
+  status        String
+  userId        Int
+  productId     Int
+  product       Product   @relation(fields: [productId], references: [id])
+}
+
+model Capacity {
+  id            Int      @id @default(autoincrement())
+  date          DateTime @unique
+  totalCapacity Int
+  usedCapacity  Int      @default(0)
+  closed        Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+model StoreSettings {
+  id                   Int     @id @default(autoincrement())
+  shop                 String  @unique
+  timezone             String  @default("Europe/London")
+  defaultDespatchLead  Int     @default(1)  // days counted Mon-Fri only
+  defaultDeliveryLead  Int     @default(2)  // days counted Mon-Sat (skip Sundays)
+  countryOverrides     Json?   // { "GB": {despatchLead:1, deliveryLead:2}, ... }
+  accessToken        String? 
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model Allocation {
+  id          Int      @id @default(autoincrement())
+  orderId     String   // Shopify order ID
+  capacityId  Int
+  despatchDate DateTime
+  createdAt   DateTime @default(now())
+}
