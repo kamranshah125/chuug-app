@@ -34,6 +34,10 @@ const config: runtime.GetPrismaClientConfig = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-musl-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -47,7 +51,6 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -56,8 +59,8 @@ const config: runtime.GetPrismaClientConfig = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Session {\n  id            String    @id\n  shop          String\n  state         String\n  isOnline      Boolean   @default(false)\n  scope         String?\n  expires       DateTime?\n  accessToken   String\n  userId        BigInt?\n  firstName     String?\n  lastName      String?\n  email         String?\n  accountOwner  Boolean   @default(false)\n  locale        String?\n  collaborator  Boolean?  @default(false)\n  emailVerified Boolean?  @default(false)\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  name      String\n  email     String   @unique\n  password  String\n  createdAt DateTime @default(now())\n}\n\nmodel Product {\n  id             Int     @id @default(autoincrement())\n  name           String\n  category       String\n  sku            String  @unique\n  productionTime Int\n  orders         Order[]\n}\n\nmodel Order {\n  id           Int      @id @default(autoincrement())\n  customerName String\n  quantity     Int\n  orderDate    DateTime\n  deliveryDate DateTime\n  status       String\n  userId       Int\n  productId    Int\n  product      Product  @relation(fields: [productId], references: [id])\n}\n\nmodel Capacity {\n  id            Int      @id @default(autoincrement())\n  date          DateTime @unique\n  totalCapacity Int\n  usedCapacity  Int      @default(0)\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n  closed        Boolean  @default(false)\n}\n\nmodel StoreSettings {\n  id                  Int      @id @default(autoincrement())\n  shop                String?\n  timezone            String   @default(\"Europe/London\")\n  defaultDespatchLead Int      @default(1)\n  defaultDeliveryLead Int      @default(2)\n  countryOverrides    Json?\n  createdAt           DateTime @default(now())\n  updatedAt           DateTime @updatedAt\n  accessToken         String?\n}\n\nmodel Allocation {\n  id           Int      @id @default(autoincrement())\n  orderId      String\n  capacityId   Int\n  despatchDate DateTime\n  createdAt    DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "646c33360fbd49f3bbc430ecfa5a0b1d92e13091cf38f197f3c572691ffc5fc4",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"linux-musl-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Session {\n  id            String    @id\n  shop          String\n  state         String\n  isOnline      Boolean   @default(false)\n  scope         String?\n  expires       DateTime?\n  accessToken   String\n  userId        BigInt?\n  firstName     String?\n  lastName      String?\n  email         String?\n  accountOwner  Boolean   @default(false)\n  locale        String?\n  collaborator  Boolean?  @default(false)\n  emailVerified Boolean?  @default(false)\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  name      String\n  email     String   @unique\n  password  String\n  createdAt DateTime @default(now())\n}\n\nmodel Product {\n  id             Int     @id @default(autoincrement())\n  name           String\n  category       String\n  sku            String  @unique\n  productionTime Int\n  orders         Order[]\n}\n\nmodel Order {\n  id           Int      @id @default(autoincrement())\n  customerName String\n  quantity     Int\n  orderDate    DateTime\n  deliveryDate DateTime\n  status       String\n  userId       Int\n  productId    Int\n  product      Product  @relation(fields: [productId], references: [id])\n}\n\nmodel Capacity {\n  id            Int      @id @default(autoincrement())\n  date          DateTime @unique\n  totalCapacity Int\n  usedCapacity  Int      @default(0)\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n  closed        Boolean  @default(false)\n}\n\nmodel StoreSettings {\n  id                  Int      @id @default(autoincrement())\n  shop                String?\n  timezone            String   @default(\"Europe/London\")\n  defaultDespatchLead Int      @default(1)\n  defaultDeliveryLead Int      @default(2)\n  countryOverrides    Json?\n  createdAt           DateTime @default(now())\n  updatedAt           DateTime @updatedAt\n  accessToken         String?\n}\n\nmodel Allocation {\n  id           Int      @id @default(autoincrement())\n  orderId      String\n  capacityId   Int\n  despatchDate DateTime\n  createdAt    DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "9ce70c9e2906be7fa21a225100d0327c53bc7e452449eb945dacab800d503b87",
   "copyEngine": true,
   "runtimeDataModel": {
     "models": {},
