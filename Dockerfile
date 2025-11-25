@@ -2,23 +2,29 @@ FROM node:20-alpine
 RUN apk add --no-cache openssl
 
 EXPOSE 3000
-
 WORKDIR /app
-
 ENV NODE_ENV=production
 
-# copy package files first
+# Copy package files first
 COPY package.json package-lock.json* ./
 
-# --- FIX: copy prisma before npm ci ---
+# Copy Prisma schema
 COPY prisma ./prisma
 
-# install dependencies (prisma generate runs here)
-RUN npm ci --omit=dev && npm cache clean --force
+# Install all dependencies including dev dependencies temporarily
+RUN npm install
 
-# now copy rest of the project
+# Generate Prisma client for linux-musl
+RUN npx prisma generate
+
+# Remove dev dependencies to keep image light
+RUN npm prune --production
+
+# Copy rest of the application
 COPY . .
 
+# Build your project
 RUN npm run build
 
+# Start the app
 CMD ["npm", "run", "docker-start"]
