@@ -7,7 +7,7 @@ import prisma from "../app/db.server.js";
 const app = express();
 const port = process.env.PORT || 3000;
 const sessionStorage = new PrismaSessionStorage(prisma, {
-  tableName: "shopify_sessions", // optional, default: "Session"
+  tableName: "session", // optional, default: "Session"
   connectionRetries: 3,           // optional
   connectionRetryIntervalMs: 500  // optional
 });
