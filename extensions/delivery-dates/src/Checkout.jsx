@@ -183,7 +183,7 @@ function DeliveryDateExtension() {
       console.log("Starting API call...");
 
       const response = await fetch(
-        "https://dam-compare-henderson-news.trycloudflare.com/api/next-despatch"
+        "https://none-topic-constitute-blah.trycloudflare.com/api/next-despatch"
       );
 
       console.log("Response status:", response.status);
