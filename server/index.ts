@@ -1,4 +1,5 @@
-import express from "express";
+import { express } from 'express';
+
 import { createRequestHandler } from "@remix-run/express";
 import { shopifyApp, ApiVersion } from '@shopify/shopify-app-remix/server';
 import "dotenv/config";
