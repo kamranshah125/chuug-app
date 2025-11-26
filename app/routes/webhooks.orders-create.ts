@@ -10,7 +10,8 @@ export const action = async ({ request }: any) => {
   const country = body?.shipping_address?.country_code ?? "GB";
 
   // Find access token from DB
-  const settings = await prisma.storeSettings.findUnique({ where: { shop } });
+  const settings = await prisma.storeSettings.findFirst({
+  where: { shop: shop }});
   const accessToken = settings?.accessToken;
 
   // allocate (attach orderId on creation)

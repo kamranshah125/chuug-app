@@ -1,12 +1,12 @@
-import { express } from 'express';
+import express, { Express } from 'express';
 
 import { createRequestHandler } from "@remix-run/express";
 import { shopifyApp, ApiVersion } from '@shopify/shopify-app-remix/server';
 import "dotenv/config";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "../app/db.server.js";
-const app = express();
-const port = process.env.PORT || 3000;
+const app: Express = express();
+const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 const HOST = '0.0.0.0';
 const sessionStorage = new PrismaSessionStorage(prisma, {
   tableName: "shopify_sessions", // optional, default: "Session"
@@ -39,6 +39,6 @@ app.all(
   })
 );
 
-app.listen(port, HOST, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });

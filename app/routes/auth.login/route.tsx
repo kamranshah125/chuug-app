@@ -23,7 +23,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function Auth() {
   const loaderData = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
-  const [shop, setShop] = useState("");
+  const [shop, setShop] = useState<string | undefined>('');
   const { errors } = actionData || loaderData;
 
   return (

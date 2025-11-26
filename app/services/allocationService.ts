@@ -40,7 +40,9 @@ export async function findAndAllocateNextAvailable({
   orderId?: string;
 }): Promise<AllocationResult | null> {
   // load settings
-  const settings = await prisma.storeSettings.findUnique({ where: { shop } });
+ const settings = await prisma.storeSettings.findFirst({
+  where: { shop: shop } // shopValue must be string
+});
   const { despatchLead, deliveryLead, timezone } = await getLeadTimes(
     settings,
     country
