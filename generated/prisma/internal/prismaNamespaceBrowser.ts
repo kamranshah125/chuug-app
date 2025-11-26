@@ -50,6 +50,7 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 export const ModelName = {
   Session: 'Session',
+  shopify_sessions: 'shopify_sessions',
   User: 'User',
   Product: 'Product',
   Order: 'Order',
@@ -93,6 +94,21 @@ export const SessionScalarFieldEnum = {
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const Shopify_sessionsScalarFieldEnum = {
+  id: 'id',
+  shop: 'shop',
+  state: 'state',
+  isOnline: 'isOnline',
+  scope: 'scope',
+  expires: 'expires',
+  accessToken: 'accessToken',
+  userId: 'userId',
+  onlineAccessInfo: 'onlineAccessInfo'
+} as const
+
+export type Shopify_sessionsScalarFieldEnum = (typeof Shopify_sessionsScalarFieldEnum)[keyof typeof Shopify_sessionsScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

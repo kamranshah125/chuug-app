@@ -27,6 +27,21 @@ model Session {
   emailVerified Boolean?  @default(false)
 }
 
+model shopify_sessions {
+  id                 String   @id @db.Text
+  shop               String   @db.Text
+  state              String?  @db.Text
+  isOnline           Boolean?
+  scope              String?  @db.Text
+  expires            DateTime?
+  accessToken        String?  @db.Text
+  userId             BigInt?
+  onlineAccessInfo   String?  @db.Text
+
+  @@map("shopify_sessions")
+}
+
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String

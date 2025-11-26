@@ -54,6 +54,11 @@ path.join(process.cwd(), "generated/prisma/libquery_engine-linux-musl-openssl-3.
  */
 export type Session = Prisma.SessionModel
 /**
+ * Model shopify_sessions
+ * 
+ */
+export type shopify_sessions = Prisma.shopify_sessionsModel
+/**
  * Model User
  * 
  */

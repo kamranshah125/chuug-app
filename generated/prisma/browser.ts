@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type Session = Prisma.SessionModel
 /**
+ * Model shopify_sessions
+ * 
+ */
+export type shopify_sessions = Prisma.shopify_sessionsModel
+/**
  * Model User
  * 
  */

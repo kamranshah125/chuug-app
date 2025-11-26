@@ -391,6 +391,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Session: 'Session',
+  shopify_sessions: 'shopify_sessions',
   User: 'User',
   Product: 'Product',
   Order: 'Order',
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "session" | "user" | "product" | "order" | "capacity" | "storeSettings" | "allocation"
+    modelProps: "session" | "shopify_sessions" | "user" | "product" | "order" | "capacity" | "storeSettings" | "allocation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -487,6 +488,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SessionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    shopify_sessions: {
+      payload: Prisma.$shopify_sessionsPayload<ExtArgs>
+      fields: Prisma.shopify_sessionsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.shopify_sessionsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.shopify_sessionsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>
+        }
+        findFirst: {
+          args: Prisma.shopify_sessionsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.shopify_sessionsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>
+        }
+        findMany: {
+          args: Prisma.shopify_sessionsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>[]
+        }
+        create: {
+          args: Prisma.shopify_sessionsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>
+        }
+        createMany: {
+          args: Prisma.shopify_sessionsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.shopify_sessionsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>[]
+        }
+        delete: {
+          args: Prisma.shopify_sessionsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>
+        }
+        update: {
+          args: Prisma.shopify_sessionsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>
+        }
+        deleteMany: {
+          args: Prisma.shopify_sessionsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.shopify_sessionsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.shopify_sessionsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>[]
+        }
+        upsert: {
+          args: Prisma.shopify_sessionsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shopify_sessionsPayload>
+        }
+        aggregate: {
+          args: Prisma.Shopify_sessionsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShopify_sessions>
+        }
+        groupBy: {
+          args: Prisma.shopify_sessionsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Shopify_sessionsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.shopify_sessionsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Shopify_sessionsCountAggregateOutputType> | number
         }
       }
     }
@@ -994,6 +1069,21 @@ export const SessionScalarFieldEnum = {
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
+export const Shopify_sessionsScalarFieldEnum = {
+  id: 'id',
+  shop: 'shop',
+  state: 'state',
+  isOnline: 'isOnline',
+  scope: 'scope',
+  expires: 'expires',
+  accessToken: 'accessToken',
+  userId: 'userId',
+  onlineAccessInfo: 'onlineAccessInfo'
+} as const
+
+export type Shopify_sessionsScalarFieldEnum = (typeof Shopify_sessionsScalarFieldEnum)[keyof typeof Shopify_sessionsScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1294,6 +1384,7 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
+  shopify_sessions?: Prisma.shopify_sessionsOmit
   user?: Prisma.UserOmit
   product?: Prisma.ProductOmit
   order?: Prisma.OrderOmit
