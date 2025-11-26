@@ -40,16 +40,16 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Copy package files
-COPY package.json package-lock.json* ./
-
-# Install all deps including dev
-RUN npm install && npm cache clean --force
-
-# Copy rest of the app
+# Copy everything (including prisma folder)
 COPY . .
 
-# Build app
+# Install dependencies (devDependencies included)
+RUN npm install
+
+# Generate Prisma client now that schema exists
+RUN npm run prisma:generate
+
+# Build your app
 RUN npm run build
 
 CMD ["npm", "run", "docker-start"]
