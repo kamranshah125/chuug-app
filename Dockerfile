@@ -40,17 +40,17 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Copy everything (including prisma folder)
+# Copy everything
 COPY . .
 
-# Install dependencies (devDependencies included)
+# Install dependencies
 RUN npm install
 
-# Generate Prisma client (will use DATABASE_URL from Railway environment)
-# The --skip-generate flag prevents postinstall from running prisma generate
-RUN npx prisma generate
+# Skip prisma generate during build - it will run at runtime
+# RUN npx prisma generate
 
 # Build your app
 RUN npm run build
 
-CMD ["npm", "run", "docker-start"]
+# Update the start command to generate prisma client first
+CMD npx prisma generate && npm run start
