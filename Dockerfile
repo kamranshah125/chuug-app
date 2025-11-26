@@ -16,6 +16,7 @@ RUN npm install
 
 # Generate Prisma client for linux-musl
 RUN npx prisma generate
+RUN npx prisma migrate deploy
 
 # Remove dev dependencies to keep image light
 RUN npm prune --production
@@ -27,4 +28,5 @@ COPY . .
 RUN npm run build
 
 # Start the app
-CMD ["npm", "run", "docker-start"]
+# CMD ["npm", "run", "docker-start"]\
+CMD ["npm", "start"]
