@@ -72,4 +72,6 @@ ENV PORT=3000
 # -----------------------------
 # Start command: generate Prisma client at runtime, then start app
 # -----------------------------
-CMD npx prisma generate && npm run docker-start
+#CMD npx prisma generate && npm run docker-start
+CMD ["node", "build/index.js"]
+
