@@ -89,7 +89,8 @@ app.use(
 // Top-level await: wrap in async IIFE to ensure proper ESM loading
 (async () => {
   try {
-    const buildModule = await import('../build/index.js');
+    // const buildModule = await import('../build/index.js');
+    const buildModule = await import('../build/server/index.js');
     const build = (buildModule as any).default ?? buildModule;
 
     if (!build) {
