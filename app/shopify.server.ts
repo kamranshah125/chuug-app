@@ -1,5 +1,6 @@
 import "@shopify/shopify-app-react-router/adapters/node";
 import 'dotenv/config';
+import 'dotenv';
  
 import {
   ApiVersion,
