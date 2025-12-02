@@ -1,6 +1,6 @@
 import "@shopify/shopify-app-react-router/adapters/node";
-import 'dotenv/config'
-import { defineConfig,env } from 'prisma/config';
+import 'dotenv/config';
+import 'dotenv';
  
 import {
   ApiVersion,
@@ -11,16 +11,16 @@ import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prism
 import prisma from "./db.server";
 
 const shopify = shopifyApp({
-  apiKey: env('SHOPIFY_API_KEY'),
-  apiSecretKey: env('SHOPIFY_API_SECRET'),
+  apiKey: process.env.SHOPIFY_API_KEY || "",
+  apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
   apiVersion: ApiVersion.October25,
-  scopes: env('SCOPES')?.split(","),
-  appUrl: env('SHOPIFY_APP_URL'),
+  scopes: process.env.SCOPES?.split(","),
+  appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
-  ...(env('SHOP_CUSTOM_DOMAIN')
-    ? { customShopDomains: [env('SHOP_CUSTOM_DOMAIN')] }
+  ...(process.env.SHOP_CUSTOM_DOMAIN
+    ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),
 });
 
