@@ -1,5 +1,5 @@
 import "@shopify/shopify-app-react-router/adapters/node";
-import 'dotenv/config'
+import 'dotenv/config';
  
 import {
   ApiVersion,
@@ -10,11 +10,11 @@ import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prism
 import prisma from "./db.server";
 
 const shopify = shopifyApp({
-  apiKey: process.env.SHOPIFY_API_KEY || "2315c4e7037379002dac14e7ef95e0d6",
-  apiSecretKey: process.env.SHOPIFY_API_SECRET || "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",
+  apiKey: process.env.SHOPIFY_API_KEY || "",
+  apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
   apiVersion: ApiVersion.October25,
   scopes: process.env.SCOPES?.split(","),
-  appUrl: process.env.SHOPIFY_APP_URL || "https://chuug-app.hypedealz.com",
+  appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
