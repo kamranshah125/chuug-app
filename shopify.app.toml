@@ -1,12 +1,13 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "b73cb01159a5a98351538096a6bba6e9"
-name = "kamran-test"
+client_id = "58d54adc2d069b6039d1bc1482975d90"
+name = "kamran125"
 application_url = "https://chuug-app-production.up.railway.app"
 embedded = true
 
 [build]
 automatically_update_urls_on_dev = true
+include_config_on_deploy = true
 
 [webhooks]
 api_version = "2026-01"
