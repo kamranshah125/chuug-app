@@ -11,14 +11,6 @@ export default function App() {
           rel="stylesheet"
           href="https://cdn.shopify.com/static/fonts/inter/v4/styles.css"
         />
-        <link
-          rel="stylesheet"
-          href="index.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.shopify.com/static/fonts/inter/v4/styles.css"
-        />
         <Meta />
         <Links />
       </head>
