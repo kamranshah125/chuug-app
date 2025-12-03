@@ -13,7 +13,7 @@ export default function App() {
         />
         <link
           rel="stylesheet"
-          href="index.css"
+          href="app/index.css"
         />
         <link
           rel="stylesheet"
