@@ -2,7 +2,7 @@
 
 client_id = "2315c4e7037379002dac14e7ef95e0d6"
 name = "chuug"
-application_url = "https://chuug-app.hypedealz.com"
+application_url = "https://chuug-app-production.up.railway.app"
 embedded = true
 
 [webhooks]
@@ -25,4 +25,4 @@ api_version = "2026-01"
 scopes = "read_orders,write_orders"
 
 [auth]
-redirect_urls = [ "https://chuug-app.hypedealz.com/api/auth" ]
+redirect_urls = [ "https://chuug-app-production.up.railway.app/api/auth" ]
