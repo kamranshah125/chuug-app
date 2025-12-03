@@ -1,7 +1,4 @@
 import "@shopify/shopify-app-react-router/adapters/node";
-import 'dotenv/config';
-import 'dotenv';
- 
 import {
   ApiVersion,
   AppDistribution,
@@ -11,7 +8,7 @@ import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prism
 import prisma from "./db.server";
 
 const shopify = shopifyApp({
-  apiKey: process.env.SHOPIFY_API_KEY || "",
+  apiKey: process.env.SHOPIFY_API_KEY,
   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
   apiVersion: ApiVersion.October25,
   scopes: process.env.SCOPES?.split(","),

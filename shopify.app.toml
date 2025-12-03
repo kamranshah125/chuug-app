@@ -1,19 +1,16 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "2315c4e7037379002dac14e7ef95e0d6"
-name = "chuug"
-application_url = "http://chuug-app-production.up.railway.app"
+client_id = "58d54adc2d069b6039d1bc1482975d90"
+name = "kamran125"
+application_url = "https://chuug-app-production.up.railway.app"
 embedded = true
 
 [build]
 automatically_update_urls_on_dev = true
+include_config_on_deploy = true
 
 [webhooks]
 api_version = "2026-01"
-
-  [[webhooks.subscriptions]]
-  topics = [ "orders/create" ]
-  uri = "/webhooks/orders-create"
 
   [[webhooks.subscriptions]]
   topics = [ "app/uninstalled" ]
@@ -25,7 +22,7 @@ api_version = "2026-01"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_orders,write_orders"
+scopes = "write_products"
 
 [auth]
-redirect_urls = [ "http://chuug-app-production.up.railway.app/api/auth" ]
+redirect_urls = [ "https://chuug-app-production.up.railway.app/api/auth" ]
