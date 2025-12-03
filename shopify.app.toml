@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "58d54adc2d069b6039d1bc1482975d90"
-name = "kamran125"
+name = "chuug-delivery-dates"
 application_url = "https://chuug-app-production.up.railway.app"
 embedded = true
 
