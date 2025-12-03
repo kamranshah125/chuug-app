@@ -106,14 +106,14 @@ export default function Index() {
         Generate a product
       </s-button> */}
 
-      <s-section heading="Congrats on creating a new Shopify app 🎉">
+      {/* <s-section heading="Congrats on creating a new Shopify app 🎉">
         <s-paragraph>
           Welcome to Chuug Delivery Dates Please go to  <s-link
             href="/app/dashboard"
           >dashboard</s-link>
           
         </s-paragraph>
-      </s-section>
+      </s-section> */}
       {/* <s-section heading="Get started with products">
         <s-paragraph>
           Generate a product with GraphQL and get the JSON output for that
