@@ -26,3 +26,6 @@ scopes = "read_orders,write_orders"
 
 [auth]
 redirect_urls = [ "https://chuug-app-production.up.railway.app/api/auth" ]
+
+[build]
+automatically_update_urls_on_dev = true
