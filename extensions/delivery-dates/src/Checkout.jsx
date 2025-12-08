@@ -183,8 +183,8 @@ function DeliveryDateExtension() {
       console.log("Starting API call...");
 
       const response = await fetch(
-        // "https://chuug-app-production.up.railway.app/api/next-despatch"
-        "https://used-taken-exports-assessed.trycloudflare.com/api/next-despatch"
+        "https://chuug-app-production.up.railway.app/api/next-despatch"
+      
 
       );
 
