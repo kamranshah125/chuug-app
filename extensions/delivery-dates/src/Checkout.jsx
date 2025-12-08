@@ -183,7 +183,9 @@ function DeliveryDateExtension() {
       console.log("Starting API call...");
 
       const response = await fetch(
-        "https://chuug-app-production.up.railway.app/api/next-despatch"
+        // "https://chuug-app-production.up.railway.app/api/next-despatch"
+        "https://used-taken-exports-assessed.trycloudflare.com/api/next-despatch"
+
       );
 
       console.log("Response status:", response.status);
@@ -191,10 +193,19 @@ function DeliveryDateExtension() {
       const data = await response.json();
       console.log("API Response data:", data);
 
-      if (data && data.deliveryDateText) {
-        setMessage(`Estimated delivery: ${data.deliveryDateText}`);
-        setStatus("success");
-      } else {
+      // if (data && data.deliveryDateText && data.despatchDateText) {
+      //   setMessage(`Estimated delivery: ${data.deliveryDateText}`);
+      //   setStatus("success");
+      // }
+      if (data && data.deliveryDateText && data.despatchDateText) {
+  setMessage(
+    `We will print and despatch your order by ${data.despatchDateText} and your order will be delivered by ${data.deliveryDateText}`
+  );
+
+  setStatus("success");
+}
+
+      else {
         setMessage("Delivery date not available");
         setStatus("warning");
       }

@@ -165,6 +165,10 @@
 //   );
 // }
 
+
+//liveee version.................................
+
+// updated version.................................
 import prisma from "app/db.server";
 import { DateTime } from "luxon";
 import type { LoaderFunctionArgs } from "react-router";
@@ -211,8 +215,43 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const tz = settings.timezone ?? "Europe/London";
     const { despatchLead, deliveryLead } = await getLeadTimes(settings, country);
 
-    let cursor = DateTime.now().setZone(tz).startOf("day");
+    // ----- 1) "Now" and base day (cutoff-aware) -----
+    const now = DateTime.now().setZone(tz);
+    let baseDay = now.startOf("day");
 
+    const cutoffStr = (settings as any).despatchCutoffTime as string | null;
+
+    if (cutoffStr) {
+      // Expect format "HH:mm" in store timezone
+      const cutoffToday = DateTime.fromFormat(cutoffStr, "HH:mm", { zone: tz }).set({
+        year: now.year,
+        month: now.month,
+        day: now.day,
+      });
+
+      // If we've passed the cutoff, we can't despatch "today" anymore – start from tomorrow
+      if (now > cutoffToday) {
+        baseDay = baseDay.plus({ days: 1 });
+      }
+    }
+
+    // ----- 2) Apply despatchLead (today + despatchLead, weekdays only) -----
+    let cursor = baseDay;
+    let leadAdded = 0;
+
+    while (leadAdded < despatchLead) {
+      cursor = cursor.plus({ days: 1 });
+
+      // Only count Mon–Fri as valid despatch "lead" days
+      if (cursor.weekday >= 1 && cursor.weekday <= 5) {
+        leadAdded++;
+      }
+    }
+
+    // At this point, `cursor` = (today or tomorrow based on cutoff) + despatchLead (weekdays)
+    // Now search for first day with available capacity FROM that cursor onwards.
+
+    // ----- 3) Find next available despatch date with capacity -----
     for (let i = 0; i < 60; i++) {
       if (cursor.weekday >= 1 && cursor.weekday <= 5) {
         const dateUtc = cursor.toUTC().toJSDate();
@@ -221,12 +260,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
         });
 
         if (cap && !(cap as any).closed && cap.usedCapacity < cap.totalCapacity) {
-          // delivery calculation
+          // ----- 4) Calculate delivery date (skip Sundays) -----
           let delivery = cursor;
           let added = 0;
+
           while (added < deliveryLead) {
             delivery = delivery.plus({ days: 1 });
-            if (delivery.weekday !== 7) added++;
+            if (delivery.weekday !== 7) {
+              added++;
+            }
           }
 
           return corsResponse({
@@ -239,6 +281,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
         }
       }
 
+      // Move to next day if no capacity (still respecting ±60 days guard)
       cursor = cursor.plus({ days: 1 });
     }
 
@@ -252,3 +295,4 @@ export async function loader({ request }: LoaderFunctionArgs) {
     );
   }
 }
+

@@ -12,7 +12,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 // Save or update store settings
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.json();
-  const { timezone, defaultDespatchLead, defaultDeliveryLead, countryOverrides } = body;
+  const { timezone, defaultDespatchLead, defaultDeliveryLead, countryOverrides,despatchCutoffTime} = body;
 
   // Validate input
   if (!timezone || defaultDespatchLead === undefined || defaultDeliveryLead === undefined) {
@@ -30,6 +30,7 @@ export async function action({ request }: ActionFunctionArgs) {
         defaultDespatchLead,
         defaultDeliveryLead,
         countryOverrides,
+        despatchCutoffTime,
       },
     });
     return Response.json({ ok: true, updated });
@@ -41,6 +42,7 @@ export async function action({ request }: ActionFunctionArgs) {
         defaultDespatchLead,
         defaultDeliveryLead,
         countryOverrides,
+        despatchCutoffTime,
       },
     });
     return Response.json({ ok: true, created });

@@ -6,6 +6,7 @@ type Settings = {
   defaultDespatchLead?: number;
   defaultDeliveryLead?: number;
   countryOverrides?: any;
+  despatchCutoffTime?: string;
 };
 
 export default function ManageSettings() {
@@ -13,6 +14,7 @@ export default function ManageSettings() {
   const [despatchLead, setDespatchLead] = useState(1);
   const [deliveryLead, setDeliveryLead] = useState(2);
   const [countryOverrides, setCountryOverrides] = useState<any>({});
+  const [despatchCutoffTime, setDespatchCutoffTime] = useState("15:00");
   const [msg, setMsg] = useState("");
 
   // Fetch existing settings
@@ -25,6 +27,7 @@ export default function ManageSettings() {
           setDespatchLead(data.defaultDespatchLead ?? 1);
           setDeliveryLead(data.defaultDeliveryLead ?? 2);
           setCountryOverrides(data.countryOverrides ?? {});
+          setDespatchCutoffTime(data.despatchCutoffTime ?? "15:00");
         }
       });
   }, []);
@@ -40,6 +43,8 @@ export default function ManageSettings() {
         defaultDespatchLead: despatchLead,
         defaultDeliveryLead: deliveryLead,
         countryOverrides,
+        despatchCutoffTime,
+        
       }),
     });
 
@@ -97,6 +102,17 @@ export default function ManageSettings() {
               className="border p-2 rounded-md"
               value={deliveryLead}
               onChange={(e) => setDeliveryLead(Number(e.target.value))}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-sm text-gray-600 mb-1">
+              Despatch Cutoff Time (UK, HH:mm)
+            </label>
+            <input
+              type="time"
+              className="border p-2 rounded-md"
+              value={despatchCutoffTime}
+              onChange={(e) => setDespatchCutoffTime(e.target.value)}
             />
           </div>
         </div>
@@ -176,7 +192,7 @@ export default function ManageSettings() {
     className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
     onClick={() => {
       const newOverrides = { ...countryOverrides };
-      let newKey = "NEW";
+      let newKey = "";
       let counter = 1;
       // ensure unique key
       while (newOverrides[newKey]) {

@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -10,7 +10,7 @@ datasource db {
 
 model Session {
   id            String    @id
-  shop          String  @unique
+  shop          String    @unique
   state         String
   isOnline      Boolean   @default(false)
   scope         String?
@@ -27,19 +27,18 @@ model Session {
 }
 
 model shopify_sessions {
-  id                 String   @id @db.Text
-  shop               String   @db.Text
-  state              String?  @db.Text
-  isOnline           Boolean?
-  scope              String?  @db.Text
-  expires            DateTime?
-  accessToken        String?  @db.Text
-  userId             BigInt?
-  onlineAccessInfo   String?  @db.Text
+  id               String    @id
+  shop             String
+  state            String?
+  isOnline         Boolean?
+  scope            String?
+  expires          DateTime?
+  accessToken      String?
+  userId           BigInt?
+  onlineAccessInfo String?
 
   @@map("shopify_sessions")
 }
-
 
 model User {
   id        Int      @id @default(autoincrement())
@@ -82,7 +81,7 @@ model Capacity {
 
 model StoreSettings {
   id                  Int      @id @default(autoincrement())
-  shop                String?   
+  shop                String?
   timezone            String   @default("Europe/London")
   defaultDespatchLead Int      @default(1)
   defaultDeliveryLead Int      @default(2)
@@ -90,6 +89,7 @@ model StoreSettings {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   accessToken         String?
+  despatchCutoffTime  String?
 }
 
 model Allocation {
