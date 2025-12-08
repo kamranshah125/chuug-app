@@ -84,6 +84,8 @@ export default function DashboardPage() {
     }
   };
   useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    setFromDate(today);
     fetchReport();
   }, []);
 
@@ -173,15 +175,15 @@ export default function DashboardPage() {
 
           <div className="grid grid-cols-3 gap-3 mb-6">
             <s-card>
-              <s-text>Total</s-text>
+              <s-text>Total Capacity   </s-text>
               <s-text>{totalCapacities}</s-text>
             </s-card>
             <s-card>
-              <s-text>Used</s-text>
+              <s-text>Used Capacity   </s-text>
               <s-text>{usedCapacities}</s-text>
             </s-card>
             <s-card>
-              <s-text>Remaining</s-text>
+              <s-text>Remaining Capacity   </s-text>
               <s-text>{remainingCapacities}</s-text>
             </s-card>
           </div>
