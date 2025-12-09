@@ -179,7 +179,7 @@ export default function DashboardPage() {
               <s-text>{totalCapacities}</s-text>
             </s-card>
             <s-card>
-              <s-text>Used Capacity   </s-text>
+              <s-text>Used Capacity </s-text>
               <s-text>{usedCapacities}</s-text>
             </s-card>
             <s-card>

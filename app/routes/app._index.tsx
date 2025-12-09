@@ -280,9 +280,10 @@ export const loader = async ({ request }: { request: Request }) => {
 export default function DashboardPage() {
   const backend = "/api/report";
   const shopify = useAppBridge();
+  const todayStr = new Date().toISOString().split("T")[0];
 
   const [data, setData] = useState<CapacityData[]>([]);
-  const [fromDate, setFromDate] = useState("");
+  const [fromDate, setFromDate] = useState(todayStr);
   const [toDate, setToDate] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -414,15 +415,15 @@ export default function DashboardPage() {
 
           <div className="grid grid-cols-3 gap-3 mb-6">
             <s-card>
-              <s-text>Total</s-text>
+              <s-text>Total Capacity  </s-text>
               <s-text>{totalCapacities}</s-text>
             </s-card>
             <s-card>
-              <s-text>Used</s-text>
+              <s-text>Used Capacity  </s-text>
               <s-text>{usedCapacities}</s-text>
             </s-card>
             <s-card>
-              <s-text>Remaining</s-text>
+              <s-text>Remaining Capacity  </s-text>
               <s-text>{remainingCapacities}</s-text>
             </s-card>
           </div>

@@ -3,11 +3,12 @@ import axios from "axios";
 
 const CapacityReportTable: React.FC = () => {
   const backend = "/api/report";
+  const todayStr = new Date().toISOString().split("T")[0];
 
   const [report, setReport] = useState<any[]>([]);
   const [summary, setSummary] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [startDate, setStartDate] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>(todayStr);
   const [endDate, setEndDate] = useState<string>("");
 
   const fetchReport = async () => {
