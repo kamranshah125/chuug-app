@@ -161,6 +161,75 @@
 //   );
 // }
 
+//working
+
+// import '@shopify/ui-extensions/preact';
+// import { render } from 'preact';
+// import { useState, useEffect } from 'preact/hooks';
+
+// export default async () => {
+//   render(<DeliveryDateExtension />, document.body);
+// };
+
+// function DeliveryDateExtension() {
+//   const [status, setStatus] = useState("loading");
+//   const [message, setMessage] = useState("Fetching delivery date...");
+
+//   useEffect(() => {
+//     fetchDeliveryDate();
+//   }, []);
+
+//   const fetchDeliveryDate = async () => {
+//     try {
+//       console.log("Starting API call...");
+
+//       const response = await fetch(
+//         "https://chuug-app-production.up.railway.app/api/next-despatch"
+      
+
+//       );
+
+//       console.log("Response status:", response.status);
+
+//       const data = await response.json();
+//       console.log("API Response data:", data);
+
+//       // if (data && data.deliveryDateText && data.despatchDateText) {
+//       //   setMessage(`Estimated delivery: ${data.deliveryDateText}`);
+//       //   setStatus("success");
+//       // }
+//       if (data && data.deliveryDateText && data.despatchDateText) {
+//   setMessage(
+//     `We will print and despatch your order by ${data.despatchDateText} and your order will be delivered by ${data.deliveryDateText}`
+//   );
+
+//   setStatus("success");
+// }
+
+//       else {
+//         setMessage("Delivery date not available");
+//         setStatus("warning");
+//       }
+//     } catch (err) {
+//       console.error("ERROR:", err);
+//       setMessage(`API Error: ${err.message}`);
+//       setStatus("critical");
+//     }
+//   };
+
+//   // Render banner only when API is done loading
+//   if (status !== "loading") {
+//     return (
+//       <s-banner heading="Delivery Information">
+//         <s-text>{message}</s-text>
+//       </s-banner>
+//     );
+//   }
+
+//   return null;
+// }
+
+//updated UI
 
 import '@shopify/ui-extensions/preact';
 import { render } from 'preact';
@@ -173,6 +242,8 @@ export default async () => {
 function DeliveryDateExtension() {
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState("Fetching delivery date...");
+  const [message2, setMessage2] = useState("Fetching Despatch date...");
+  
 
   useEffect(() => {
     fetchDeliveryDate();
@@ -199,8 +270,9 @@ function DeliveryDateExtension() {
       // }
       if (data && data.deliveryDateText && data.despatchDateText) {
   setMessage(
-    `We will print and despatch your order by ${data.despatchDateText} and your order will be delivered by ${data.deliveryDateText}`
+    ` ${data.deliveryDateText} `
   );
+  setMessage2(` ${data.despatchDateText} `);
 
   setStatus("success");
 }
@@ -219,9 +291,21 @@ function DeliveryDateExtension() {
   // Render banner only when API is done loading
   if (status !== "loading") {
     return (
-      <s-banner heading="Delivery Information">
-        <s-text>{message}</s-text>
+      <s-banner heading="Delivery Information" tone="success">
+        <s-text type="offset" >
+          We will print and despatch your order by
+         </s-text>
+          <s-text type="strong" >
+          {message2}
+          </s-text>
+          <s-text type="offset" >
+          and your order will be delivered by  
+         </s-text>
+         <s-text type="strong" >
+          {message}
+          </s-text>
       </s-banner>
+      
     );
   }
 

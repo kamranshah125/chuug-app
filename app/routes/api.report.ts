@@ -13,11 +13,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   let whereClause: any = {};
   if (startDate && endDate) {
     whereClause.date = { gte: new Date(startDate), lte: new Date(endDate) };
+  // } else if (startDate) {
+  //   const d = new Date(startDate);
+  //   d.setUTCHours(0, 0, 0, 0);
+  //   whereClause.date = d;
+  // }
   } else if (startDate) {
-    const d = new Date(startDate);
-    d.setUTCHours(0, 0, 0, 0);
-    whereClause.date = d;
-  }
+  whereClause.date = { gte: new Date(startDate) }; // ✔ match today and all future dates
+}
 
   // Fetch from DB
   const capacities = await prisma.capacity.findMany({
